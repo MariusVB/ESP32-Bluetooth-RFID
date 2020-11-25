@@ -31,11 +31,11 @@ int lastRead = 0;
 void loop() {
 
     bool cardRead = mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial();
-    bool timeoutOver = (lastRead+READ_TIMEOUT_MS) < millis();
+    bool timeoutOver = (lastRead + READ_TIMEOUT_MS) < millis();
     
     if (bleKeyboard.isConnected() && cardRead && timeoutOver ) {
         String result = getRFIDString(mfrc522.uid);        
-        Serial.println("RFID: " + result + ":");
+        Serial.println("RFID: " + result);
         bleKeyboard.println(result);
         lastRead = millis();
     }
